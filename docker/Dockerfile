@@ -23,4 +23,7 @@ RUN pip install -U https://github.com/turicas/rows/archive/develop.zip
 
 COPY . /app
 
+RUN pip install --no-cache-dir -U pip \
+  && pip install --no-cache-dir -r /app/requirements.txt
+
 WORKDIR  /app
