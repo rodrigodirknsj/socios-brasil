@@ -37,12 +37,3 @@ services:
         volumes:
             - ./:/app
         command: /app/run.sh 
-
-    pgimport:
-        build: .    
-        env_file: .env
-        environment: 
-            - POSTGRESQL_URI="postgres://postgres:postgres@db:5432/cnpj" 
-        volumes:
-            - ./:/app
-        command: /app/import.sh

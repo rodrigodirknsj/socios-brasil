@@ -21,6 +21,6 @@ RUN pip install rows[cli]
 RUN pip install rows[postgresql]
 RUN pip install -U https://github.com/turicas/rows/archive/develop.zip
 
-COPY . /app
+# COPY . /app
 
 WORKDIR  /app

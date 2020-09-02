@@ -11,6 +11,7 @@ else
 fi
 
 function download_data() {
+	DOWNLOAD_LINK_TXT="data/download/links.txt"
 	CONNECTIONS=4
 	DOWNLOAD_URL="https://receita.economia.gov.br/orientacao/tributaria/cadastros/cadastro-nacional-de-pessoas-juridicas-cnpj/dados-publicos-cnpj"
 	FILE_URLS=$(wget --quiet --no-check-certificate -O - "$DOWNLOAD_URL" \
@@ -20,12 +21,16 @@ function download_data() {
 		| sort)
 	MIRROR_URL="https://data.brasil.io/mirror/socios-brasil"
 
+	rm -rf $DOWNLOAD_LINK_TXT
+
 	for url in $FILE_URLS; do
 		if $USE_MIRROR; then
-			url+=" $MIRROR_URL/$(basename $url)"
+			url="$MIRROR_URL/$(basename $url)"
+			
 		fi
-		time aria2c --auto-file-renaming=false --continue=true -s $CONNECTIONS -x $CONNECTIONS --dir=data/download "$url"
+		echo $url >> $DOWNLOAD_LINK_TXT
 	done
+	time aria2c --auto-file-renaming=false --continue=true -s $CONNECTIONS -x $CONNECTIONS --dir=data/download -i $DOWNLOAD_LINK_TXT
 }
 
 function extract_data() {
@@ -60,7 +65,7 @@ function rows_import(){
 }
 
 download_data
-extract_data
-extract_holding
-extract_cnae
-rows_import
+# extract_data
+# extract_holding
+# extract_cnae
+# rows_import
