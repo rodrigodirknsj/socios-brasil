@@ -34,7 +34,7 @@ function download_data() {
 }
 
 function extract_data() {
-	time python3 extract_dump.py --no_censorship data/output/ data/download/DADOS_ABERTOS_CNPJ_1*.zip
+	time python3 extract_dump.py --no_censorship data/output/ data/download/DADOS_ABERTOS_CNPJ_*.zip
 	time python3 extract_cnae_cnpj.py data/output/{empresa,cnae_secundaria,cnae_cnpj}.csv.gz
 }
 
