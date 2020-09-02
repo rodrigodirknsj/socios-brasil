@@ -65,7 +65,7 @@ function rows_import(){
 }
 
 download_data
-# extract_data
-# extract_holding
-# extract_cnae
-# rows_import
+extract_data
+extract_holding
+extract_cnae
+rows_import
