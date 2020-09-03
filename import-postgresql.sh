@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCHEMA_PATH="schema"
+SCHEMA_PATH="schema-full"
 OUTPUT_PATH="data/output"
 
 function import_table() {
