@@ -57,15 +57,8 @@ function extract_cnae() {
 	done
 }
 
-function rows_import(){
-	rows pgimport --schema=schema/empresa.csv /app/data/output/empresa.csv.gz $POSTGRESQL_URI empresa
-	rows pgimport --schema=schema/socio.csv /app/data/output/holdings.csv.gz $POSTGRESQL_URI holding
-	rows pgimport --schema=schema/socio.csv /app/data/output/socio.csv.gz $POSTGRESQL_URI socio
-	rows pgimport --schema=schema/cnae-secundaria.csv /app/data/output/cnae-secundaria.csv.gz $POSTGRESQL_URI cnae_secundaria
-}
 
 download_data
 extract_data
 extract_holding
 extract_cnae
-rows_import
