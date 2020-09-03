@@ -4,14 +4,24 @@ SCHEMA_PATH="schema-full"
 OUTPUT_PATH="data/output"
 
 function import_table() {
-	tablename="$1"
+	
+	if [ "$2" = "cnae" ]; then
+		tablename="$3"
+		filename="$OUTPUT_PATH/${1}.csv.gz"
+		schema="$SCHEMA_PATH/${2}.csv"		
+	else
+		tablename="$1"
+		filename="$OUTPUT_PATH/${tablename}.csv.gz"
+		schema="$SCHEMA_PATH/${tablename}.csv"		
+	fi
+
 
 	echo "DROP TABLE IF EXISTS ${tablename};" | psql "$POSTGRESQL_URI"
 	time rows pgimport \
-		--schema="$SCHEMA_PATH/${tablename}.csv" \
+		--schema="$schema" \
 		--input-encoding="utf-8" \
 		--dialect="excel" \
-		"$OUTPUT_PATH/${tablename}.csv.gz" \
+		"$filename" \
 		"$POSTGRESQL_URI" \
 		"$tablename"
 }
