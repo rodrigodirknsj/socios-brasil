@@ -16,7 +16,7 @@ function import_table() {
 	fi
 
 
-	echo "DROP TABLE IF EXISTS ${tablename};" | psql "$POSTGRESQL_URI"
+	echo "DROP TABLE IF EXISTS ${tablename}; CASCADE" | psql "$POSTGRESQL_URI"
 	time rows pgimport \
 		--schema="$sch" \
 		--input-encoding="utf-8" \
