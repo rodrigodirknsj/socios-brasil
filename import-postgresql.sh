@@ -7,21 +7,21 @@ function import_table() {
 	
 	if [ "$2" = "cnae" ]; then
 		tablename="$3"
-		filename="$OUTPUT_PATH/${1}.csv.gz"
-		schema="$SCHEMA_PATH/${2}.csv"		
+		fname="$OUTPUT_PATH/${1}.csv.gz"
+		sch="$SCHEMA_PATH/${2}.csv"		
 	else
 		tablename="$1"
-		filename="$OUTPUT_PATH/${tablename}.csv.gz"
-		schema="$SCHEMA_PATH/${tablename}.csv"		
+		fname="$OUTPUT_PATH/${tablename}.csv.gz"
+		sch="$SCHEMA_PATH/${tablename}.csv"		
 	fi
 
 
 	echo "DROP TABLE IF EXISTS ${tablename};" | psql "$POSTGRESQL_URI"
 	time rows pgimport \
-		--schema="$schema" \
+		--schema="$sch" \
 		--input-encoding="utf-8" \
 		--dialect="excel" \
-		"$filename" \
+		"$fname" \
 		"$POSTGRESQL_URI" \
 		"$tablename"
 }
