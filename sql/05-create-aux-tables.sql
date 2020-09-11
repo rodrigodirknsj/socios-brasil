@@ -1,4 +1,4 @@
-DROP TABLE qualificacao_responsavel_socio IF EXISTS;
+DROP TABLE IF EXISTS qualificacao_responsavel_socio;
 
 CREATE TABLE qualificacao_responsavel_socio
 (
